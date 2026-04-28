@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-model = pickle.load(open(r'C:\Users\owald\OneDrive\Desktop\mldeploy\my_model.pkl', 'rb'))
-preprocessor = pickle.load(open(r'C:\Users\owald\OneDrive\Desktop\mldeploy\scaler.pkl', 'rb'))
+model = pickle.load(open('my_model.pkl', 'rb'))
+preprocessor = pickle.load(open('scaler.pkl', 'rb'))
 
 THRESHOLD = 0.68
 
