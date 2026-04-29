@@ -1,19 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import traceback
-
-try:
-    model = pickle.load(open('my_model.pkl', 'rb'))
-    preprocessor = pickle.load(open('scaler.pkl', 'rb'))
-except Exception as e:
-    st.error(f"Error loading model: {e}")
-    st.error(traceback.format_exc())
-    st.stop()
-
-import streamlit as st
-import pandas as pd
-import pickle
 
 model = pickle.load(open('my_model.pkl', 'rb'))
 preprocessor = pickle.load(open('scaler.pkl', 'rb'))
@@ -126,16 +113,6 @@ def main():
 
     lender = st.selectbox("Lender", ["A", "B", "C"])
 
-    # Derive Income Level automatically from Monthly Gross Income
-    if monthly_gross_income <= 3542:
-        income_level = "Low"
-    elif monthly_gross_income <= 5008:
-        income_level = "Mid-Low"
-    elif monthly_gross_income <= 7347:
-        income_level = "Mid-High"
-    else:
-        income_level = "High"
-
     user_input = {
         "Reason": reason,
         "Requested_Loan_Amount": requested_loan_amount,
@@ -145,8 +122,7 @@ def main():
         "Monthly_Gross_Income": monthly_gross_income,
         "Monthly_Housing_Payment": monthly_housing_payment,
         "Ever_Bankrupt_or_Foreclose": ever_bankrupt,
-        "Lender": lender,
-        "Income_Level": income_level
+        "Lender": lender
     }
 
     input_df = pd.DataFrame([user_input])
