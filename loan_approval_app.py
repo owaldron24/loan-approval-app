@@ -1,6 +1,19 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import traceback
+
+try:
+    model = pickle.load(open('my_model.pkl', 'rb'))
+    preprocessor = pickle.load(open('scaler.pkl', 'rb'))
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    st.error(traceback.format_exc())
+    st.stop()
+
+import streamlit as st
+import pandas as pd
+import pickle
 
 model = pickle.load(open('my_model.pkl', 'rb'))
 preprocessor = pickle.load(open('scaler.pkl', 'rb'))
